@@ -1,18 +1,79 @@
 "use client";
+
 import { getRouteMeta } from "@/routesConfig";
-import { usePathname } from "next/navigation";
-import { memo } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { memo, useEffect, useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
+import { FiSun, FiMoon } from "react-icons/fi";
+import { useTheme } from "next-themes";
+import {
+    DropdownMenu,
+    DropdownMenuTrigger,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 
 const ClientHeader = () => {
     const pathname = usePathname();
     const routeMeta = getRouteMeta(pathname);
+    const router = useRouter();
+    const { theme, setTheme } = useTheme();
+
+    const handleLogout = () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("role");
+
+        document.cookie = "isLoggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        router.push("/login");
+    };
+
+    const toggleTheme = () => {
+        setTheme(theme === "light" ? "dark" : "light");
+    };
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) return null;
 
     return (
         <header className="flex items-center justify-between p-4 border-b">
-            <div className="flex items-center gap-2 text-gray-700">
-                <HiUserCircle className="w-8 h-8 rounded-full" />
+            <div className="flex items-center gap-3 text-gray-700">
+                {/* Toggle Theme Button */}
+                <button
+                    onClick={toggleTheme}
+                    className="text-xl text-gray-700 dark:text-white transition-colors"
+                >
+                    {theme === "dark" ? <FiSun /> : <FiMoon />}
+                </button>
+
+                {/* Avatar Dropdown */}
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <button>
+                            <HiUserCircle className="w-8 h-8 rounded-full cursor-pointer" />
+                        </button>
+                    </DropdownMenuTrigger>
+
+                    <DropdownMenuContent className="w-48" align="end">
+                        <DropdownMenuLabel>Account</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => console.log("Go to Settings")}>
+                            Settings
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={handleLogout}>
+                            LogOut
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
+
             <h1 className="text-xl font-semibold flex justify-end">
                 {routeMeta ? routeMeta.name : "Unknown"}
             </h1>

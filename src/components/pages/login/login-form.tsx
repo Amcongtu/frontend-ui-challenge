@@ -36,7 +36,7 @@ export function LoginForm() {
     const onSubmit = (data: FormData) => {
         const { email, password } = data;
 
-        if (email === "admin@gmail.com" && password === "Kasradash@2015") {
+        if (email === "admin@gmail.com" && password === "Kasradash@2025") {
             document.cookie = "isLoggedIn=true; path=/";
             document.cookie = "role=admin; path=/";
             localStorage.setItem("isLoggedIn", "true");

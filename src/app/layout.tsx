@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/layout/common/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,13 +22,23 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en"
+      className="dark"
+      style={{ colorScheme: "dark" }}
+    >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
+        className={`${geistMono.className}`}
         cz-shortcut-listen="true"
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
-    </html>
+    </html >
   );
 }
