@@ -2,7 +2,9 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-
+#__next_dev_overlay {
+  display: none !important;
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
