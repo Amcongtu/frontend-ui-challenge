@@ -153,3 +153,18 @@
 .animate-wiggle {
   animation: wiggle 0.3s ease-in-out;
 }
+
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: #3b82f6; /* Tailwind blue-500 */
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
