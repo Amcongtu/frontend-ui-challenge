@@ -10,7 +10,8 @@ export const routesConfig: RouteMeta[] = [
   { path: "/", name: "Home" },
   { path: "/community", name: "Community" },
   { path: "/suppliers", name: "Suppliers" },
-  { path: "/clientModule/dashboard", name: "Dashboard" },
+  { path: "/notification", name: "Notification" },
+  { path: "/event", name: "Event" },
   // add other routes here as needed
 ];
 

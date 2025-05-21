@@ -1,135 +1,122 @@
 "use client";
 
+import { useState } from "react";
+import { Calendar, MapPin, Bookmark, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import { useState, useEffect } from "react";
 
-const suppliers = [
+const filters = [
+    "All Events",
+    "Upcoming This Month",
+    "By Region",
+    "By Type",
+    "Sponsored",
+];
+
+const events = [
     {
         id: 1,
-        name: "Alpha Supplies",
-        category: "Office Equipment",
-        description: "Reliable office products",
+        title: "Search Optimization Summit",
+        date: "June 27 10:00 AM GMT",
+        location: "London",
+        tags: ["SEO", "Link Building"],
     },
     {
         id: 2,
-        name: "Beta Services",
-        category: "Cleaning",
-        description: "Top-notch cleaning solutions",
+        title: "Digital Marketing Conference",
+        date: "July 14 9:00 AM",
+        location: "New York",
+        tags: ["SEO", "Link Building"],
     },
     {
         id: 3,
-        name: "Gamma Logistics",
-        category: "Delivery",
-        description: "Fast and safe delivery services",
-    },
-    {
-        id: 4,
-        name: "Delta Tech",
-        category: "IT Support",
-        description: "24/7 IT help desk",
-    },
-    {
-        id: 5,
-        name: "Epsilon Foods",
-        category: "Catering",
-        description: "Delicious food for events",
-    },
-    {
-        id: 6,
-        name: "Zeta Marketing",
-        category: "Advertising",
-        description: "Creative marketing campaigns",
-    },
-    {
-        id: 7,
-        name: "Eta Construction",
-        category: "Building Materials",
-        description: "High-quality materials",
-    },
-    {
-        id: 8,
-        name: "Theta Consulting",
-        category: "Business Consulting",
-        description: "Expert business advice",
+        title: "SEO Webinar Series",
+        date: "August 5 2:00 CDT",
+        location: "Online",
+        tags: ["SEO"],
     },
 ];
 
-// Simple Skeleton component
-function SkeletonSupplier() {
-    return (
-        <div className="flex items-start justify-between border rounded-md p-3 bg-white animate-pulse">
-            <div className="flex items-start space-x-3">
-                <div className="w-12 h-12 bg-gray-300 rounded" />
-                <div className="space-y-2 flex flex-col">
-                    <div className="h-4 w-24 bg-gray-300 rounded"></div>
-                    <div className="h-3 w-32 bg-gray-300 rounded"></div>
-                    <div className="h-3 w-40 bg-gray-300 rounded"></div>
-                </div>
-            </div>
-            <div className="w-20 h-8 bg-gray-300 rounded" />
-        </div>
-    );
-}
-
-export default function SupplierPage() {
-    const [loading, setLoading] = useState(true);
-
-    // Giả lập delay load data
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, []);
+export default function EventsPage() {
+    const [activeFilter, setActiveFilter] = useState("All Events");
 
     return (
-        <div className="mx-auto p-4 space-y-4 overflow-scroll h-[calc(100%-70px)]">
-            {/* Sponsored Label */}
-            <div className="text-xs font-semibold uppercase text-gray-500">Sponsored</div>
+        <div className="relative  bg-white dark:bg-gray-900 text-black dark:text-white">
+            {/* Header */}
+            <div className="p-4 text-2xl font-semibold">Events</div>
 
-            {/* Supplier List */}
-            {loading
-                ? // Hiển thị skeleton tách từng phần tử (8 lần)
-                <>
-                    <SkeletonSupplier />
-                    <SkeletonSupplier />
-                    <SkeletonSupplier />
-                    <SkeletonSupplier />
-                    <SkeletonSupplier />
-                    <SkeletonSupplier />
-                    <SkeletonSupplier />
-                    <SkeletonSupplier />
-                </>
-                : // Hiển thị data thật
-                suppliers.map((supplier) => (
-                    <div
-                        key={supplier.id}
-                        className="flex items-start justify-between border rounded-md p-3 bg-white"
+            {/* Filters */}
+            <div className="flex flex-wrap gap-2 px-4 pb-4">
+                {filters.map((filter) => (
+                    <Button
+                        key={filter}
+                        variant={activeFilter === filter ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setActiveFilter(filter)}
+                        className="rounded-full text-xs"
                     >
-                        <div className="flex items-start space-x-3">
-                            <div className="w-12 h-12 bg-gray-200 rounded" />
-                            <div>
-                                <div className="font-semibold">{supplier.name}</div>
-                                <div className="text-sm text-gray-600">{supplier.category}</div>
-                                <div className="text-sm text-gray-500">{supplier.description}</div>
-                            </div>
+                        {filter}
+                    </Button>
+                ))}
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-xs text-gray-500 dark:text-gray-400"
+                    onClick={() => setActiveFilter("All Events")}
+                >
+                    Clear
+                </Button>
+            </div>
+
+            {/* Event Cards */}
+            <div className="space-y-4 px-4 pb-3 h-[calc(100%-54px)] overflow-auto">
+                {events.map((event) => (
+                    <div
+                        key={event.id}
+                        className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 relative border border-gray-100 dark:border-gray-700"
+                    >
+                        <Bookmark className="absolute top-4 right-4 w-4 h-4 text-gray-400 dark:text-gray-300" />
+
+                        {/* Placeholder for image */}
+                        <div className="bg-gray-200 dark:bg-gray-700 h-28 mb-3 rounded-md" />
+
+                        <h3 className="font-semibold text-sm mb-1">{event.title}</h3>
+
+                        <div className="text-xs text-gray-600 dark:text-gray-300 flex items-center gap-1 mb-1">
+                            <Calendar className="w-4 h-4" />
+                            {event.date}
                         </div>
-                        <Button variant="outline" size="sm">
-                            View Profile
-                        </Button>
+                        <div className="text-xs text-gray-600 dark:text-gray-300 flex items-center gap-1 mb-2">
+                            <MapPin className="w-4 h-4" />
+                            {event.location}
+                        </div>
+
+                        <div className="flex gap-2 flex-wrap">
+                            {event.tags.map((tag) => (
+                                <span
+                                    key={tag}
+                                    className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-2 py-1 rounded-full"
+                                >
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
                     </div>
                 ))}
+            </div>
 
             {/* CTA Buttons */}
-            <div className="flex items-center justify-center fixed bottom-[47px] left-0 right-0 bg-white h-[70px] shadow-xl border">
+            <div className="flex items-center justify-center fixed bottom-[60px] left-0 right-0 bg-white dark:bg-gray-900 h-[70px] shadow-xl dark:shadow-none border dark:border-gray-700">
                 <Button className="w-fit hover:scale-105 transition-transform duration-200">
                     Apply to Be a Supplier
                 </Button>
             </div>
-            <button className="ml-4 w-12 fixed bottom-[88px] right-4 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800">
+
+
+            {/* Floating Action Button */}
+            <button className="fixed bottom-[90px] right-4 w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-200 shadow-xl">
                 <Plus className="w-5 h-5" />
             </button>
+
         </div>
     );
 }

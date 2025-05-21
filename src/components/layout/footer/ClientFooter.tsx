@@ -29,7 +29,7 @@ const ClientFooter = () => {
             {navItems.map(({ label, href, icon: Icon }) => {
                 const isActive = pathname === href;
                 return (
-                    <RippleButton key={label} className="flex flex-col items-center justify-center text-sm w-full h-full text-center">
+                    <RippleButton key={label} className="flex flex-col items-center justify-center text-[12px] w-full h-full text-center">
                         <Link
                             href={href}
                             className={`flex flex-col items-center justify-center w-full h-full ${isActive ? "text-blue-600" : "text-gray-600"
