@@ -8,7 +8,7 @@ export interface RouteMeta {
 
 export const routesConfig: RouteMeta[] = [
   { path: "/", name: "Home" },
-  { path: "/clientModule", name: "Client Module Home" },
+  { path: "/community", name: "Community" },
   { path: "/clientModule/about", name: "About" },
   { path: "/clientModule/dashboard", name: "Dashboard" },
   // add other routes here as needed
