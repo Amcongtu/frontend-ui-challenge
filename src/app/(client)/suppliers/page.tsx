@@ -38,7 +38,7 @@ const suppliers = [
 
 export default function SupplierListPage() {
     return (
-        <div className="relative bg-white dark:bg-gray-900 text-black dark:text-white">
+        <div className="relative bg-white dark:bg-gray-900 text-black dark:text-white  md:mx-auto md:w-md">
             {/* Header */}
             <div className="p-4 text-xs font-semibold">
                 <Button variant="outline" size="sm" className="rounded-full text-xs">
@@ -72,7 +72,7 @@ export default function SupplierListPage() {
             </div>
 
             {/* Apply Button */}
-            <div className="flex items-center justify-center fixed bottom-[60px] left-0 right-0 bg-white dark:bg-gray-900 h-[70px] shadow-xl border-t dark:border-gray-700">
+            <div className="flex items-center justify-center fixed bottom-[60px] left-0 right-0 bg-white dark:bg-gray-900 h-[70px] shadow-xl border-t dark:border-gray-700  md:mx-auto md:w-md">
                 <Button className="w-fit text-sm hover:scale-105 transition-transform duration-200">
                     Apply to Be a Supplier
                 </Button>

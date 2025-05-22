@@ -43,7 +43,7 @@ const ClientHeader = () => {
     if (!isMounted) return null;
 
     return (
-        <header className="flex items-center justify-between p-4 border-b">
+        <header className="flex items-center justify-between p-4 border-b md:mx-auto md:w-md">
             <div className="flex items-center gap-3 text-gray-700">
                 {/* Avatar Dropdown */}
                 <DropdownMenu>

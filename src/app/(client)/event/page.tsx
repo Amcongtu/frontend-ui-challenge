@@ -108,21 +108,6 @@ export default function EventsPage() {
             <button className="fixed bottom-[90px] right-4 w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-200 shadow-xl">
                 <Plus className="w-5 h-5" />
             </button>
-
-            {/* Bottom Navigation */}
-            <nav className="fixed bottom-0 left-0 right-0 h-[60px] bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 flex justify-around items-center">
-                {["Home", "Community", "Suppliers", "Events", "Notifications"].map((tab) => (
-                    <div
-                        key={tab}
-                        className={`text-xs ${tab === "Events"
-                                ? "text-black dark:text-white font-semibold"
-                                : "text-gray-600 dark:text-gray-400"
-                            }`}
-                    >
-                        {tab}
-                    </div>
-                ))}
-            </nav>
         </div>
     );
 }

@@ -20,7 +20,7 @@ export default function PageTransitionWrapper({ children }: { children: React.Re
     }
 
     return (
-        <main className="flex-grow overflow-hidden h-[calc(100vh-128px)]">
+        <main className="flex-grow overflow-hidden h-[calc(100vh-128px)] md:mx-auto md:w-md">
             <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                     key={pathname}

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { memo } from "react";
+import { memo, ReactNode, MouseEvent, useRef } from "react";
 import {
     AiOutlineHome,
     AiOutlineUsergroupAdd,
@@ -10,7 +10,6 @@ import {
     AiOutlineFlag,
     AiOutlineBell,
 } from "react-icons/ai";
-import { ReactNode, MouseEvent, useRef } from "react";
 
 const navItems = [
     { label: "Home", href: "/", icon: AiOutlineHome },
@@ -20,19 +19,23 @@ const navItems = [
     { label: "Notification", href: "/notification", icon: AiOutlineBell },
 ];
 
-
 const ClientFooter = () => {
     const pathname = usePathname();
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around items-center h-16 shadow-md z-50 dark:bg-black">
+        <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 border-t border-gray-200 dark:border-zinc-800 flex justify-around items-center h-16 shadow-md z-50 md:mx-auto md:w-md">
             {navItems.map(({ label, href, icon: Icon }) => {
                 const isActive = pathname === href;
                 return (
-                    <RippleButton key={label} className="flex flex-col items-center justify-center text-[10px] w-full h-full text-center">
+                    <RippleButton
+                        key={label}
+                        className="flex flex-col items-center justify-center text-[10px] w-full h-full text-center"
+                    >
                         <Link
                             href={href}
-                            className={`flex flex-col items-center justify-center w-full h-full ${isActive ? "text-blue-600" : "text-gray-600"
+                            className={`flex flex-col items-center justify-center w-full h-full transition-colors duration-150 ${isActive
+                                    ? "text-blue-600 dark:text-blue-400"
+                                    : "text-gray-600 dark:text-gray-400"
                                 }`}
                             aria-label={label}
                         >
@@ -45,8 +48,6 @@ const ClientFooter = () => {
         </nav>
     );
 };
-
-
 
 const RippleButton = ({
     children,
@@ -68,8 +69,10 @@ const RippleButton = ({
         const radius = diameter / 2;
 
         circle.style.width = circle.style.height = `${diameter}px`;
-        circle.style.left = `${e.clientX - button.getBoundingClientRect().left - radius}px`;
-        circle.style.top = `${e.clientY - button.getBoundingClientRect().top - radius}px`;
+        circle.style.left = `${e.clientX - button.getBoundingClientRect().left - radius
+            }px`;
+        circle.style.top = `${e.clientY - button.getBoundingClientRect().top - radius
+            }px`;
         circle.classList.add("ripple");
 
         const ripple = button.getElementsByClassName("ripple")[0];
@@ -89,6 +92,6 @@ const RippleButton = ({
             {children}
         </span>
     );
-}
+};
 
 export default memo(ClientFooter);
