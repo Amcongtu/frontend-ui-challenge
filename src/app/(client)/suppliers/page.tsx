@@ -2,39 +2,9 @@
 
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const suppliers = [
-    {
-        id: 1,
-        name: "Suppioer name",
-        category: "Service cagory",
-        description: "Sample textsincedo",
-    },
-    {
-        id: 2,
-        name: "Suppioer name",
-        category: "Service cagory",
-        description: "Sample textsincedo",
-    },
-    {
-        id: 3,
-        name: "Suppioer name",
-        category: "Service cagory",
-        description: "Sample textsincedo",
-    },
-    {
-        id: 4,
-        name: "Suppioer name",
-        category: "Service cagory",
-        description: "Sample textsincedo",
-    },
-    {
-        id: 5,
-        name: "Suppioer name",
-        category: "Service cagory",
-        description: "Sample textsincedo",
-    },
-];
+import { suppliers } from "@/data/suppliers";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function SupplierListPage() {
     return (
@@ -54,19 +24,27 @@ export default function SupplierListPage() {
                         className="flex items-start gap-4 border-b pb-4"
                     >
                         {/* Image Placeholder */}
-                        <div className="w-16 h-16 bg-gray-300 rounded-md" />
+                        <Image
+                            src={supplier.image}
+                            alt={`${supplier.name} avatar`}
+                            width={96}
+                            height={96}
+                            className="rounded-md object-cover mb-4"
+                        />
 
                         {/* Text Content */}
                         <div className="flex-1">
                             <div className="font-semibold text-sm">{supplier.name}</div>
                             <div className="text-xs text-gray-500">{supplier.category}</div>
-                            <div className="text-xs text-gray-500">{supplier.description}</div>
+                            <div className="text-xs text-gray-500 line-clamp-3 mt-2">{supplier.description}</div>
                         </div>
 
                         {/* View Profile Button */}
-                        <Button variant="outline" size="sm" className="text-xs whitespace-nowrap">
-                            View Profile
-                        </Button>
+                        <Link href={`/suppliers/${supplier.id}`}>
+                            <Button variant="outline" size="sm" className="text-xs whitespace-nowrap">
+                                View Profile
+                            </Button>
+                        </Link>
                     </div>
                 ))}
             </div>
@@ -79,7 +57,7 @@ export default function SupplierListPage() {
             </div>
 
             {/* Floating Action Button */}
-            <button className="fixed bottom-[90px] right-4 w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-200 shadow-xl">
+            <button className="sticky left-[365px] bottom-[80px] w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-200 shadow-xl">
                 <Plus className="w-5 h-5" />
             </button>
         </div>
