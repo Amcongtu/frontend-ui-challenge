@@ -57,10 +57,10 @@ const ClientHeader = () => {
                     <DropdownMenuContent side="bottom" align="start" className="w-48">
                         <DropdownMenuLabel>Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem >
+                        <DropdownMenuItem onSelect={() => router.push('/profile')}>
                             <Link href="/profile" className="block">Profile</Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={handleLogout}>
+                        <DropdownMenuItem onSelect={handleLogout}>
                             LogOut
                         </DropdownMenuItem>
                     </DropdownMenuContent>

@@ -60,15 +60,15 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 // Post card UI
 function PostCard({ title, summary, likes, comments }: { title: string; summary: string; likes: number; comments: number }) {
   return (
-    <Card className="p-3 flex justify-between items-start">
+    <Card className="p-3 flex justify-between items-start flex-row h-full">
       <div className="flex gap-3">
-        <div className="rounded-full bg-gray-300 w-10 h-10" />
+        <div className="rounded-full bg-gray-300 w-10 h-10 border border-gray-600" />
         <div>
           <div className="font-medium text-sm">{title}</div>
           <div className="text-muted-foreground text-sm">{summary}</div>
         </div>
       </div>
-      <div className="flex gap-3 text-muted-foreground text-sm items-center">
+      <div className="flex gap-3 text-muted-foreground text-sm items-center h-full  self-center">
         <div className="flex items-center gap-1"><Heart className="w-4 h-4" /> {likes}</div>
         <div className="flex items-center gap-1"><MessageCircle className="w-4 h-4" /> {comments}</div>
       </div>
@@ -79,14 +79,14 @@ function PostCard({ title, summary, likes, comments }: { title: string; summary:
 // Event card UI
 function EventCard({ title, date, tag }: { title: string; date: string; tag: string }) {
   return (
-    <Card className="p-3 flex gap-3 items-start">
-      <div className="rounded-md bg-gray-300 w-16 h-16" />
+    <Card className="p-3 flex gap-3 items-start flex-row">
+      <div className="rounded-md bg-gray-300 w-16 h-16 border border-gray-600" />
       <div className="flex-1 space-y-1">
         <div className="font-medium text-sm">{title}</div>
         <div className="text-xs text-muted-foreground">{date}</div>
-        <Badge variant="outline" className="text-xs">{tag}</Badge>
+        <Badge variant="outline" className="text-xs bg-fuchsia-100/50">{tag}</Badge>
       </div>
-      <Button size="sm" variant="outline" className="text-xs mt-1">RSVP’d</Button>
+      <Button size="sm" variant="outline" className="text-xs mt-1 ">RSVP’d</Button>
     </Card>
   );
 }
