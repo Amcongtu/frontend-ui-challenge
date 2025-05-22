@@ -13,6 +13,7 @@ export const routesConfig: RouteMeta[] = [
     pattern: /^\/community\/[^/]+$/,
   },
   { path: "/suppliers", name: "Suppliers" },
+  { path: "/suppliers/:id", name: "Suppliers Detail",  pattern: /^\/suppliers\/[^/]+$/ },
   { path: "/event", name: "Event" },
   { path: "/event/:id", name: "Event Detail", pattern: /^\/event\/[^/]+$/ },
 ];

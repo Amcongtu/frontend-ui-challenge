@@ -57,7 +57,7 @@ const ClientHeader = () => {
                         <DropdownMenuLabel>Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => console.log("Go to Settings")}>
-                            Settings
+                            Profile
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={handleLogout}>
                             LogOut
