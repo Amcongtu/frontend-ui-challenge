@@ -53,7 +53,7 @@ const ClientHeader = () => {
                         </button>
                     </DropdownMenuTrigger>
 
-                    <DropdownMenuContent className="w-48" align="end">
+                    <DropdownMenuContent side="bottom" align="start" className="w-48">
                         <DropdownMenuLabel>Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => console.log("Go to Settings")}>
