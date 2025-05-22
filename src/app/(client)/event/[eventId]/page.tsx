@@ -15,10 +15,26 @@ import { events } from "@/data/events";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { BackButton } from "@/components/layout/common/BackButton";
+import Link from "next/link";
 
 interface EventPageProps {
     params: { eventId: string };
 }
+function getRandomEventId(currentId: number) {
+    const otherEvents = events.filter(e => e.id !== currentId);
+    if (otherEvents.length === 0) {
+        return currentId;
+    }
+    const randomIndex = Math.floor(Math.random() * otherEvents.length);
+    let randomId = otherEvents[randomIndex].id;
+
+    if (randomId === currentId) {
+        randomId = otherEvents[(randomIndex + 1) % otherEvents.length].id;
+    }
+
+    return randomId;
+}
+
 
 export default function EventDetailPage({ params }: EventPageProps) {
     const eventId = Number(params.eventId);
@@ -123,9 +139,9 @@ export default function EventDetailPage({ params }: EventPageProps) {
                     <Share2 className="w-4 h-4 mr-1" />
                     Share
                 </Button>
-                <div className="text-sm text-blue-600 hover:underline cursor-pointer">
+                <Link href={`/event/${getRandomEventId(eventId)}`} className="div text-sm text-blue-600 hover:underline cursor-pointer">
                     Related Events →
-                </div>
+                </Link>
             </div>
         </Card>
     );

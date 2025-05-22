@@ -34,35 +34,35 @@ export default function EventsPage() {
     const [activeFilter, setActiveFilter] = useState(filters[0].value);
 
     return (
-        <div className="relative overflow-y-scroll h-full bg-white dark:bg-gray-900 text-black dark:text-white">
-            {/* Header */}
-            <div className="p-4 text-2xl font-semibold">Events</div>
+        <>
+            <div className="relative overflow-y-scroll h-full bg-white dark:bg-gray-900 text-black dark:text-white">
+                {/* Header */}
+                <div className="p-4 text-2xl font-semibold">Events</div>
 
-            {/* Filters */}
-            <div className="flex flex-wrap gap-2 px-4 pb-4">
-                {filters.map((filter) => (
+                {/* Filters */}
+                <div className="flex flex-wrap gap-2 px-4 pb-4">
+                    {filters.map((filter) => (
+                        <Button
+                            key={filter.value}
+                            variant={activeFilter === filter.value ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => setActiveFilter(filter.value)}
+                            className="rounded-full text-xs"
+                        >
+                            {filter.label}
+                        </Button>
+                    ))}
                     <Button
-                        key={filter.value}
-                        variant={activeFilter === filter.value ? "default" : "outline"}
+                        variant="ghost"
                         size="sm"
-                        onClick={() => setActiveFilter(filter.value)}
-                        className="rounded-full text-xs"
+                        className="text-xs text-gray-500 dark:text-gray-400"
+                        onClick={() => setActiveFilter("all-events")}
                     >
-                        {filter.label}
+                        Clear
                     </Button>
-                ))}
-                <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-xs text-gray-500 dark:text-gray-400"
-                    onClick={() => setActiveFilter("all-events")}
-                >
-                    Clear
-                </Button>
-            </div>
+                </div>
 
-            {/* Event Cards */}
-            <div className="space-y-4 px-4 pb-3">
+                {/* Event Cards */}
                 <AnimatePresence mode="wait" initial={false}>
                     <motion.div
                         key={activeFilter}
@@ -113,12 +113,15 @@ export default function EventsPage() {
                             ))}
                     </motion.div>
                 </AnimatePresence>
-            </div>
 
+
+            </div>
             {/* Floating Action Button */}
-            <button className="fixed bottom-[90px] right-4 w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-200 shadow-xl">
-                <Plus className="w-5 h-5" />
-            </button>
-        </div>
+            <div className="sticky flex justify-end mr-[40px] bottom-[28px] z-50">
+                <button className=" w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-200 shadow-xl">
+                    <Plus className="w-5 h-5" />
+                </button>
+            </div>
+        </>
     );
 }
