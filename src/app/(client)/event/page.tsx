@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { Calendar, MapPin, Bookmark, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { events } from "@/data/events";
+import Link from "next/link";
+import Image from "next/image";
 
 const filters = [
     "All Events",
@@ -10,30 +13,6 @@ const filters = [
     "By Region",
     "By Type",
     "Sponsored",
-];
-
-const events = [
-    {
-        id: 1,
-        title: "Search Optimization Summit",
-        date: "June 27 10:00 AM GMT",
-        location: "London",
-        tags: ["SEO", "Link Building"],
-    },
-    {
-        id: 2,
-        title: "Digital Marketing Conference",
-        date: "July 14 9:00 AM",
-        location: "New York",
-        tags: ["SEO", "Link Building"],
-    },
-    {
-        id: 3,
-        title: "SEO Webinar Series",
-        date: "August 5 2:00 CDT",
-        location: "Online",
-        tags: ["SEO"],
-    },
 ];
 
 export default function EventsPage() {
@@ -70,14 +49,21 @@ export default function EventsPage() {
             {/* Event Cards */}
             <div className="space-y-4 px-4 pb-3">
                 {events.map((event) => (
-                    <div
+                    <Link
+                        href={`/event/${event.id}`}
                         key={event.id}
-                        className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 relative border border-gray-100 dark:border-gray-700"
+                        className="block bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 relative border border-gray-100 dark:border-gray-700"
                     >
-                        <Bookmark className="absolute top-4 right-4 w-4 h-4 text-gray-400 dark:text-gray-300" />
+                        <Bookmark className="absolute top-5 right-5 w-4 h-4 text-gray-400 dark:text-gray-300" />
 
                         {/* Placeholder for image */}
-                        <div className="bg-gray-200 dark:bg-gray-700 h-28 mb-3 rounded-md" />
+                        <Image
+                            src={event.image}
+                            alt={event.title}
+                            width={400}
+                            height={112}
+                            className="w-full h-auto max-h-48 rounded mb-3 object-cover"
+                        />
 
                         <h3 className="font-semibold text-sm mb-1">{event.title}</h3>
 
@@ -100,7 +86,7 @@ export default function EventsPage() {
                                 </span>
                             ))}
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
 
