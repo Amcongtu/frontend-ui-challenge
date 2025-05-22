@@ -13,6 +13,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import { useUserStore } from "@/stores/userStore";
+import { user } from "@/data/users";
 
 const formSchema = z.object({
     email: z.string().email("Invalid email"),
@@ -23,6 +25,7 @@ type FormData = z.infer<typeof formSchema>;
 
 export function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
+    const login = useUserStore.getState().login;
     const {
         register,
         handleSubmit,
@@ -39,9 +42,8 @@ export function LoginForm() {
         if (email === "admin@gmail.com" && password === "Kasradash@2025") {
             document.cookie = "isLoggedIn=true; path=/";
             document.cookie = "role=admin; path=/";
-            localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("role", "admin");
 
+            login(user);
             router.push("/");
         } else {
             alert("Invalid credentials");

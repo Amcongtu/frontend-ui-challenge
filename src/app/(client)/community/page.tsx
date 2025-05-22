@@ -4,9 +4,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { comunityData, TabKey } from "@/data/comunicaty";
+import { TabKey } from "@/data/comunicaty";
 import Link from "next/link";
 import Image from "next/image";
+import { useCommunityStore } from "@/stores/communityStore";
+import { useRouter } from "next/navigation";
 
 const tabs = [
     { label: "On-Page", value: "on-page" },
@@ -18,12 +20,13 @@ const tabs = [
 
 export default function CommunityTabPage() {
     const [clicked, setClicked] = useState(false);
-
+    const router = useRouter();
+    const comunityData = useCommunityStore((state) => state.data);
     const handleClick = () => {
         setClicked(true);
-        setTimeout(() => setClicked(false), 300);
+        setClicked(false);
+        router.push("/community/create");
     };
-
     return (
         <>
             <Tabs defaultValue="on-page" className="relative h-full flex flex-col">
@@ -97,12 +100,13 @@ export default function CommunityTabPage() {
             </Tabs>
             {/* Floating button */}
             <div className="sticky flex justify-end mr-[40px] bottom-[28px] z-50">
-                <button
+                <Link
+                    href={"/community/create"}
                     onClick={handleClick}
                     className={`w-12 h-12 bg-black text-white dark:bg-white dark:text-black rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:bg-gray-800 dark:hover:bg-gray-300 hover:scale-105 ${clicked ? "animate-pop" : ""}`}
                 >
                     <Plus className="w-6 h-6" />
-                </button>
+                </Link>
             </div>
         </>
     );

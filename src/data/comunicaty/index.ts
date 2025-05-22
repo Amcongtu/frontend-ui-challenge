@@ -19,7 +19,7 @@ export const comunityData: Record<
   "on-page": [
     {
       id: "1",
-      userName: "Alice",
+      userName: "admin",
       title: "SEO Basics",
       text: "Learn how to optimize...",
       likes: 10,

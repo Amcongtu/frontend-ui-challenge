@@ -5,13 +5,16 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, MessageCircle } from "lucide-react";
+import { useUserStore } from "@/stores/userStore";
 
 export default function HomePage() {
+  const user = useUserStore((state) => state.user);
+
   return (
     <div className="p-4 space-y-6 max-w-xl mx-auto h-full overflow-auto">
       {/* Welcome + Search */}
       <div className="space-y-2">
-        <h1 className="text-2xl font-semibold">Welcome back, Alex 👋</h1>
+        <h1 className="text-2xl font-semibold">Welcome back, {user?.name} 👋</h1>
         <Input placeholder="Search" className="rounded-full" />
       </div>
 

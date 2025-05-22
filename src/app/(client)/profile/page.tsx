@@ -1,21 +1,32 @@
 'use client';
 
+import { useUserStore } from "@/stores/userStore";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ChevronRight } from "lucide-react";
 
 export default function ProfilePage() {
+    const user = useUserStore((state) => state.user);
+
+    if (!user) {
+        return <div className="text-center mt-10 text-muted-foreground">No data</div>;
+    }
+
     return (
         <div className="max-w-md mx-auto p-4 space-y-6 h-full overflow-auto">
             {/* Avatar + Header */}
             <div className="flex flex-col items-center space-y-3">
-                <div className="w-24 h-24 bg-gray-300 rounded-full" />
+                <img
+                    src={user.avatar || "/avatar/default.png"}
+                    alt="Avatar"
+                    className="w-24 h-24 rounded-full object-cover bg-gray-300"
+                />
                 <div className="text-center">
-                    <h2 className="text-lg font-semibold">Jane Doe</h2>
-                    <p className="text-sm text-muted-foreground">janedoe@example.com</p>
+                    <h2 className="text-lg font-semibold">{user.name}</h2>
+                    <p className="text-sm text-muted-foreground">{user.email}</p>
                     <p className="text-sm text-muted-foreground mt-1">
-                        SEO specialist and content marketer
+                        {user.role === "admin" ? "Administrator" : "User"}
                     </p>
                 </div>
                 <Button variant="outline" size="sm">Contact</Button>
@@ -38,7 +49,7 @@ export default function ProfilePage() {
 
                 <TabsContent value="posts" className="space-y-2 mt-4">
                     {[1, 2, 3, 4].map((i) => (
-                        <PostItem key={i} title={`Post title`} excerpt="Brief excerpt or description" />
+                        <PostItem key={i} title={`Post ${i}`} excerpt="Brief excerpt or description" />
                     ))}
                 </TabsContent>
 
