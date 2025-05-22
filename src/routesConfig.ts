@@ -6,6 +6,7 @@ interface RouteMeta {
 
 export const routesConfig: RouteMeta[] = [
   { path: "/", name: "Home" },
+  { path: "/profile", name: "Profile" },
   { path: "/community", name: "Community" },
   {
     path: "/community/:id",

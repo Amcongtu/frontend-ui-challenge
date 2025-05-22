@@ -14,6 +14,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 const ClientHeader = () => {
     const pathname = usePathname();
@@ -56,8 +57,8 @@ const ClientHeader = () => {
                     <DropdownMenuContent side="bottom" align="start" className="w-48">
                         <DropdownMenuLabel>Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => console.log("Go to Settings")}>
-                            Profile
+                        <DropdownMenuItem >
+                            <Link href="/profile" className="block">Profile</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={handleLogout}>
                             LogOut
