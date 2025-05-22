@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { Calendar, MapPin, Bookmark, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { events, EventType } from "@/data/events";
+import { EventType } from "@/data/events";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEventStore } from "@/stores/useEventStore";
 const filters = [
     {
         label: "All Events",
@@ -32,6 +33,7 @@ const filters = [
 
 export default function EventsPage() {
     const [activeFilter, setActiveFilter] = useState(filters[0].value);
+    const filteredEvents = useEventStore((state) => state.events)
 
     return (
         <>
@@ -72,7 +74,7 @@ export default function EventsPage() {
                         transition={{ duration: 0.3 }}
                         className="space-y-4 px-4 pb-3"
                     >
-                        {events
+                        {filteredEvents
                             .filter(event =>
                                 activeFilter === "all-events" ? true : event.type === activeFilter
                             )
@@ -118,9 +120,9 @@ export default function EventsPage() {
             </div>
             {/* Floating Action Button */}
             <div className="sticky flex justify-end mr-[40px] bottom-[28px] z-50">
-                <button className=" w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-200 shadow-xl">
+                <Link href={"/event/create"} className=" w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-200 shadow-xl">
                     <Plus className="w-5 h-5" />
-                </button>
+                </Link>
             </div>
         </>
     );

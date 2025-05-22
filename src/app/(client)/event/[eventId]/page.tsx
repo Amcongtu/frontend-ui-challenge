@@ -1,3 +1,5 @@
+"use client"
+
 import {
     Calendar as CalendarIcon,
     Clock,
@@ -10,17 +12,19 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { Card } from "@/components/ui/card";
-import { events } from "@/data/events";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { BackButton } from "@/components/layout/common/BackButton";
 import Link from "next/link";
+import { useEventStore } from "@/stores/useEventStore";
+import { use, useMemo } from "react";
 
 interface EventPageProps {
-    params: { eventId: string };
+    params: Promise<{ eventId: string }>;
 }
 function getRandomEventId(currentId: number) {
+    const events = useEventStore((state) => state.events)
+
     const otherEvents = events.filter(e => e.id !== currentId);
     if (otherEvents.length === 0) {
         return currentId;
@@ -36,14 +40,18 @@ function getRandomEventId(currentId: number) {
 }
 
 
-export default function EventDetailPage({ params }: EventPageProps) {
-    const eventId = Number(params.eventId);
-    const event = events.find((e) => e.id === eventId);
+export default function EventDetailPage(props: EventPageProps) {
+    const { eventId } = use(props.params);
+    const events = useEventStore((state) => state.events)
+
+    const id = Number(eventId);
+    const event = useMemo(() => events.find((e) => e.id === id), [events, id]);
+
 
     if (!event) return notFound();
 
     return (
-        <Card className="max-w-md mx-auto p-4 space-y-4 h-full overflow-auto">
+        <div className="max-w-md mx-auto p-4 space-y-4 h-full overflow-auto">
             <BackButton />
             {/* Event Image */}
             <Image
@@ -139,10 +147,10 @@ export default function EventDetailPage({ params }: EventPageProps) {
                     <Share2 className="w-4 h-4 mr-1" />
                     Share
                 </Button>
-                <Link href={`/event/${getRandomEventId(eventId)}`} className="div text-sm text-blue-600 hover:underline cursor-pointer">
+                <Link href={`/event/${getRandomEventId(Number(eventId))}`} className="div text-sm text-blue-600 hover:underline cursor-pointer">
                     Related Events →
                 </Link>
             </div>
-        </Card>
+        </div>
     );
 }
