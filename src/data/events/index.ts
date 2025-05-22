@@ -1,3 +1,10 @@
+export enum EventType {
+  UPCOMING_THIS_MONTH = "upcoming-this-month",
+  BY_REGION = "by-region",
+  BY_TYPE = "by-type",
+  SPONSORED = "sponsored",
+}
+
 export const events = [
   {
     id: 1,
@@ -12,10 +19,11 @@ export const events = [
     sponsored: true,
     organizer: {
       name: "John SEO",
-      avatar: "/avatars/john.png", 
+      avatar: "/avatars/john.png",
       bio: "Founder at SEOPros and digital strategy consultant.",
     },
     attendees: 24,
+    type: EventType.UPCOMING_THIS_MONTH,
   },
   {
     id: 2,
@@ -34,6 +42,7 @@ export const events = [
       bio: "CMO at MarketFlow.",
     },
     attendees: 51,
+    type: EventType.UPCOMING_THIS_MONTH,
   },
   {
     id: 3,
@@ -52,5 +61,25 @@ export const events = [
       bio: "SEO Educator and Consultant.",
     },
     attendees: 72,
+    type: EventType.BY_REGION,
+  },
+  {
+    id: 4,
+    title: "SPONSORED Webinar Series",
+    date: "August 5, 2024",
+    time: "2:00 PM CDT",
+    location: "Online",
+    tags: ["SEO", "Remote"],
+    image: "https://picsum.photos/192/600",
+    description:
+      "A monthly webinar covering the basics to advanced topics in SEO. Ideal for remote learners.",
+    sponsored: false,
+    organizer: {
+      name: "Michael Liu",
+      avatar: "",
+      bio: "SEO Educator and Consultant.",
+    },
+    attendees: 72,
+    type: EventType.SPONSORED,
   },
 ];
