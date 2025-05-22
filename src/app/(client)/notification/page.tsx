@@ -27,7 +27,7 @@ export default function NotificationPage() {
     }, {} as Record<string, NotificationItem[]>);
 
     return (
-        <div className="max-w-2xl mx-auto px-4 py-6 space-y-6 h-full">
+        <div className="mx-auto px-4 py-6 space-y-6 h-full overflow-auto">
             <div className="flex justify-between items-center">
                 <h2 className="text-xl font-semibold">Notifications</h2>
                 <Button variant="link" className="text-sm p-0 h-auto">Mark all as read</Button>
@@ -36,7 +36,7 @@ export default function NotificationPage() {
             {Object.entries(grouped).map(([date, items]) => (
                 <Card key={date}>
                     <CardContent className="p-4">
-                        {date !== "Today" && (
+                        {(
                             <div className="text-sm font-medium text-muted-foreground mb-3">{date}</div>
                         )}
 

@@ -45,19 +45,11 @@ const ClientHeader = () => {
     return (
         <header className="flex items-center justify-between p-4 border-b">
             <div className="flex items-center gap-3 text-gray-700">
-                {/* Toggle Theme Button */}
-                <button
-                    onClick={toggleTheme}
-                    className="text-xl text-gray-700 dark:text-white transition-colors"
-                >
-                    {theme === "dark" ? <FiSun /> : <FiMoon />}
-                </button>
-
                 {/* Avatar Dropdown */}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <button>
-                            <HiUserCircle className="w-8 h-8 rounded-full cursor-pointer" />
+                            <HiUserCircle className="w-8 h-8 rounded-full cursor-pointer dark:text-white" />
                         </button>
                     </DropdownMenuTrigger>
 
@@ -72,6 +64,14 @@ const ClientHeader = () => {
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
+
+                {/* Toggle Theme Button */}
+                <button
+                    onClick={toggleTheme}
+                    className="text-xl text-gray-700 dark:text-white transition-colors cursor-pointer"
+                >
+                    {theme === "dark" ? <FiSun /> : <FiMoon />}
+                </button>
             </div>
 
             <h1 className="text-xl font-semibold flex justify-end">

@@ -1,122 +1,87 @@
 "use client";
 
-import { useState } from "react";
-import { Calendar, MapPin, Bookmark, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const filters = [
-    "All Events",
-    "Upcoming This Month",
-    "By Region",
-    "By Type",
-    "Sponsored",
-];
-
-const events = [
+const suppliers = [
     {
         id: 1,
-        title: "Search Optimization Summit",
-        date: "June 27 10:00 AM GMT",
-        location: "London",
-        tags: ["SEO", "Link Building"],
+        name: "Suppioer name",
+        category: "Service cagory",
+        description: "Sample textsincedo",
     },
     {
         id: 2,
-        title: "Digital Marketing Conference",
-        date: "July 14 9:00 AM",
-        location: "New York",
-        tags: ["SEO", "Link Building"],
+        name: "Suppioer name",
+        category: "Service cagory",
+        description: "Sample textsincedo",
     },
     {
         id: 3,
-        title: "SEO Webinar Series",
-        date: "August 5 2:00 CDT",
-        location: "Online",
-        tags: ["SEO"],
+        name: "Suppioer name",
+        category: "Service cagory",
+        description: "Sample textsincedo",
+    },
+    {
+        id: 4,
+        name: "Suppioer name",
+        category: "Service cagory",
+        description: "Sample textsincedo",
+    },
+    {
+        id: 5,
+        name: "Suppioer name",
+        category: "Service cagory",
+        description: "Sample textsincedo",
     },
 ];
 
-export default function EventsPage() {
-    const [activeFilter, setActiveFilter] = useState("All Events");
-
+export default function SupplierListPage() {
     return (
-        <div className="relative  bg-white dark:bg-gray-900 text-black dark:text-white">
+        <div className="relative bg-white dark:bg-gray-900 text-black dark:text-white">
             {/* Header */}
-            <div className="p-4 text-2xl font-semibold">Events</div>
-
-            {/* Filters */}
-            <div className="flex flex-wrap gap-2 px-4 pb-4">
-                {filters.map((filter) => (
-                    <Button
-                        key={filter}
-                        variant={activeFilter === filter ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => setActiveFilter(filter)}
-                        className="rounded-full text-xs"
-                    >
-                        {filter}
-                    </Button>
-                ))}
-                <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-xs text-gray-500 dark:text-gray-400"
-                    onClick={() => setActiveFilter("All Events")}
-                >
-                    Clear
+            <div className="p-4 text-xs font-semibold">
+                <Button variant="outline" size="sm" className="rounded-full text-xs">
+                    SPONSORED
                 </Button>
             </div>
 
-            {/* Event Cards */}
-            <div className="space-y-4 px-4 pb-3 h-[calc(100%-54px)] overflow-auto">
-                {events.map((event) => (
+            {/* Supplier List */}
+            <div className="space-y-4 px-4 pb-3 h-[calc(100vh-258px)] overflow-auto">
+                {suppliers.map((supplier) => (
                     <div
-                        key={event.id}
-                        className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 relative border border-gray-100 dark:border-gray-700"
+                        key={supplier.id}
+                        className="flex items-start gap-4 border-b pb-4"
                     >
-                        <Bookmark className="absolute top-4 right-4 w-4 h-4 text-gray-400 dark:text-gray-300" />
+                        {/* Image Placeholder */}
+                        <div className="w-16 h-16 bg-gray-300 rounded-md" />
 
-                        {/* Placeholder for image */}
-                        <div className="bg-gray-200 dark:bg-gray-700 h-28 mb-3 rounded-md" />
-
-                        <h3 className="font-semibold text-sm mb-1">{event.title}</h3>
-
-                        <div className="text-xs text-gray-600 dark:text-gray-300 flex items-center gap-1 mb-1">
-                            <Calendar className="w-4 h-4" />
-                            {event.date}
-                        </div>
-                        <div className="text-xs text-gray-600 dark:text-gray-300 flex items-center gap-1 mb-2">
-                            <MapPin className="w-4 h-4" />
-                            {event.location}
+                        {/* Text Content */}
+                        <div className="flex-1">
+                            <div className="font-semibold text-sm">{supplier.name}</div>
+                            <div className="text-xs text-gray-500">{supplier.category}</div>
+                            <div className="text-xs text-gray-500">{supplier.description}</div>
                         </div>
 
-                        <div className="flex gap-2 flex-wrap">
-                            {event.tags.map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-2 py-1 rounded-full"
-                                >
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
+                        {/* View Profile Button */}
+                        <Button variant="outline" size="sm" className="text-xs whitespace-nowrap">
+                            View Profile
+                        </Button>
                     </div>
                 ))}
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex items-center justify-center fixed bottom-[60px] left-0 right-0 bg-white dark:bg-gray-900 h-[70px] shadow-xl dark:shadow-none border dark:border-gray-700">
-                <Button className="w-fit hover:scale-105 transition-transform duration-200">
+            {/* Apply Button */}
+            <div className="flex items-center justify-center fixed bottom-[60px] left-0 right-0 bg-white dark:bg-gray-900 h-[70px] shadow-xl border-t dark:border-gray-700">
+                <Button className="w-fit text-sm hover:scale-105 transition-transform duration-200">
                     Apply to Be a Supplier
                 </Button>
             </div>
-
 
             {/* Floating Action Button */}
             <button className="fixed bottom-[90px] right-4 w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-200 shadow-xl">
                 <Plus className="w-5 h-5" />
             </button>
-
         </div>
     );
 }
