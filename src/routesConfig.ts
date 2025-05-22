@@ -1,20 +1,24 @@
-// routesConfig.ts
-export interface RouteMeta {
+interface RouteMeta {
   path: string;
   name: string;
-  icon?: React.ReactNode; // optional icon if you want
-  // You can add more fields like roles, layout type, description, etc.
+  pattern?: RegExp; // new
 }
 
 export const routesConfig: RouteMeta[] = [
   { path: "/", name: "Home" },
   { path: "/community", name: "Community" },
+  {
+    path: "/community/:id",
+    name: "Post Detail",
+    pattern: /^\/community\/[^/]+$/,
+  },
   { path: "/suppliers", name: "Suppliers" },
-  { path: "/notification", name: "Notification" },
   { path: "/event", name: "Event" },
-  // add other routes here as needed
+  { path: "/event/:id", name: "Event Detail", pattern: /^\/event\/[^/]+$/ },
 ];
 
 export function getRouteMeta(pathname: string): RouteMeta | undefined {
-  return routesConfig.find((route) => route.path === pathname);
+  return routesConfig.find(
+    (route) => pathname === route.path || route.pattern?.test(pathname)
+  );
 }
