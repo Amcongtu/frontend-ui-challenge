@@ -45,7 +45,7 @@ export default function CreatePostPage() {
     const onSubmit = (data: FormData) => {
         addPost(data.tab, {
             id: crypto.randomUUID(),
-            userName: String(user?.id ?? "guest"),
+            userName: String(user?.userName ?? "guest"),
             title: data.title,
             text: data.text,
             likes: 0,
