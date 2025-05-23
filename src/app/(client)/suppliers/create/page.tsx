@@ -30,6 +30,7 @@ type FormData = z.infer<typeof formSchema>
 
 export default function SupplierFormPage() {
     const [imagePreview, setImagePreview] = useState<string | null>(null)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [imageFile, setImageFile] = useState<File | null>(null)
     const addSupplier = useSupplierStore((state) => state.addSupplier)
     const router = useRouter()

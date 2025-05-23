@@ -6,7 +6,6 @@ import { useUserStore } from "@/stores/userStore";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { TabKey } from "@/data/comunicaty";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,6 +25,7 @@ export default function CreatePostPage() {
     const addPost = useCommunityStore((s) => s.addPost);
     const user = useUserStore((s) => s.user);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 

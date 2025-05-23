@@ -34,6 +34,7 @@ type FormData = z.infer<typeof formSchema>
 
 export default function CreateEventPage() {
     const router = useRouter()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [imageFile, setImageFile] = useState<File | null>(null)
     const [imagePreview, setImagePreview] = useState<string | null>(null)
     const { addEvent } = useEventStore()

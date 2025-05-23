@@ -1,11 +1,13 @@
 # 🎉 Next.js Admin Dashboard
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app), designed with **admin/client role-based access**, using **Tailwind CSS**, **shadcn/ui**, and **middleware-based auth routing**.
+This is a [Next.js](https://nextjs.org) project bootstrapped designed with **admin/client role-based access**, using **Tailwind CSS**, **shadcn/ui**, and **middleware-based auth routing**.
 
 ---
 
 ## 🚀 Getting Started
-install package
+
+Install package
+
 ```bash
 npm install
 # or
@@ -25,9 +27,11 @@ pnpm dev
 # or
 bun dev
 ```
+
 Visit http://localhost:3000 to see the result.
 
 ## Login Instructions
+
 # This project supports two types of users: Admin and Client.
 
 Login works by checking hardcoded credentials and setting authentication cookies (isLoggedIn and role).
