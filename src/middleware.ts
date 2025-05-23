@@ -3,10 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isLoggedIn = request.cookies.get("isLoggedIn")?.value === "true";
-
-  console.log("Middleware - isLoggedIn:", isLoggedIn, "path:", pathname);
+  const role = request.cookies.get("role")?.value;
 
   const isAuthPage = pathname === "/login" || pathname === "/register";
+  const isDashboardPage = pathname.startsWith("/dashboard");
 
   if (!isLoggedIn && !isAuthPage) {
     return NextResponse.redirect(new URL("/login", request.url));
@@ -14,6 +14,14 @@ export function middleware(request: NextRequest) {
 
   if (isLoggedIn && isAuthPage) {
     return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (isDashboardPage && role !== "admin") {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (pathname === "/" && isLoggedIn && role === "admin") {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   return NextResponse.next();
