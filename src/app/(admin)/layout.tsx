@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
+import CountUp from "react-countup";
 
 export default function AdminDashboard() {
     const router = useRouter();
@@ -15,10 +16,11 @@ export default function AdminDashboard() {
 
         router.push("/login");
     };
+
     return (
-        <div className="flex h-screen">
+        <div className="flex flex-col md:flex-row h-screen">
             {/* Sidebar */}
-            <aside className="w-64 bg-gray-100 p-4 border-r space-y-4">
+            <aside className="hidden md:block w-64 bg-gray-100 p-4 border-r space-y-4 flex-shrink-0">
                 <h2 className="text-lg font-semibold">Dashboard</h2>
                 <ul className="space-y-3 text-sm">
                     <li className="px-2 py-2 rounded hover:bg-gray-200 cursor-pointer">Pending Suppliers</li>
@@ -34,17 +36,18 @@ export default function AdminDashboard() {
                 </ul>
             </aside>
 
-
             {/* Main content */}
-            <main className="flex-1 p-6 space-y-6 overflow-auto">
+            <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-auto">
                 <h1 className="text-2xl font-bold">Admin Dashboard</h1>
 
                 {/* Stats */}
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {["Submissions", "Total Users", "Active Posts", "Reported Content"].map((label, i) => (
                         <Card key={i} className="text-center py-4">
                             <CardContent>
-                                <div className="text-2xl font-bold">{[8, 150, 24, 2][i]}</div>
+                                <div className="text-2xl font-bold">
+                                    <CountUp end={[8, 150, 24, 2][i]} duration={1.5} />
+                                </div>
                                 <div className="text-muted-foreground text-sm">{label}</div>
                             </CardContent>
                         </Card>
@@ -52,12 +55,12 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* Pending Suppliers & Events */}
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div>
                         <h2 className="font-semibold mb-2">Pending Suppliers</h2>
                         <div className="space-y-2">
                             {[1, 2].map((_, i) => (
-                                <Card key={i} className="p-3 flex justify-between items-center">
+                                <Card key={i} className="p-3 flex justify-between items-center flex-row">
                                     <div className="font-medium">Supplier Name</div>
                                     <Button size="sm">Approve</Button>
                                 </Card>
@@ -69,7 +72,7 @@ export default function AdminDashboard() {
                         <h2 className="font-semibold mb-2">Pending Events</h2>
                         <div className="space-y-2">
                             {[1, 2].map((_, i) => (
-                                <Card key={i} className="p-3 flex justify-between items-center">
+                                <Card key={i} className="p-3 flex justify-between items-center flex-row">
                                     <div className="font-medium">Event Name</div>
                                     <div className="space-x-2">
                                         <Button size="sm">Approve</Button>
@@ -84,9 +87,9 @@ export default function AdminDashboard() {
                 {/* Reported Posts */}
                 <div>
                     <h2 className="font-semibold mb-2">Reported Posts</h2>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {[1, 2, 3, 4].map((_, i) => (
-                            <Card key={i} className="p-3 flex justify-between items-center">
+                            <Card key={i} className="p-3 flex justify-between items-center flex-row">
                                 <div>
                                     <div className="font-medium">Post Title</div>
                                     <div className="text-sm text-muted-foreground">Description or reason</div>
