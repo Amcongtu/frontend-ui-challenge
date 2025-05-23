@@ -6,16 +6,53 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, MessageCircle } from "lucide-react";
 import { useUserStore } from "@/stores/userStore";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSearchStore } from "@/stores/search";
+import { FaSearch } from 'react-icons/fa';
 
 export default function HomePage() {
   const user = useUserStore((state) => state.user);
+  const [input, setInput] = useState('');
+  const setQuery = useSearchStore((state) => state.setQuery);
+  const router = useRouter();
 
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && input.trim()) {
+      setQuery(input.trim());
+      router.push(`/search?q=${encodeURIComponent(input.trim())}`);
+    }
+  }
+  const handleButtonClick = () => {
+    if (input.trim()) {
+      setQuery(input.trim());
+      router.push(`/search?q=${encodeURIComponent(input.trim())}`);
+    }
+  };
   return (
     <div className="p-4 space-y-6 max-w-xl mx-auto h-full overflow-auto">
       {/* Welcome + Search */}
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold">Welcome back, {user?.name} 👋</h1>
-        <Input placeholder="Search" className="rounded-full" />
+        <div className="relative w-full max-w-md mx-auto">
+          <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <Input
+            type="text"
+            placeholder="Search..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleSearch}
+            className="w-full pl-10 pr-20 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            onClick={() => {
+              handleButtonClick()
+            }}
+            className="absolute cursor-pointer right-1 top-1/2 transform -translate-y-1/2 bg-gray-500 text-white px-4 py-1 rounded-full hover:bg-gray-600"
+          >
+            Search
+          </button>
+        </div>
       </div>
 
       {/* Trending Posts */}

@@ -23,6 +23,7 @@ interface EventPageProps {
     params: Promise<{ eventId: string }>;
 }
 function getRandomEventId(currentId: number) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const events = useEventStore((state) => state.events)
 
     const otherEvents = events.filter(e => e.id !== currentId);

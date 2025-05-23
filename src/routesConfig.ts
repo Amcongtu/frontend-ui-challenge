@@ -17,6 +17,7 @@ export const routesConfig: RouteMeta[] = [
   { path: "/suppliers/:id", name: "Suppliers Detail",  pattern: /^\/suppliers\/[^/]+$/ },
   { path: "/event", name: "Event" },
   { path: "/event/:id", name: "Event Detail", pattern: /^\/event\/[^/]+$/ },
+  { path: "/search", name: "Search" },
 ];
 
 export function getRouteMeta(pathname: string): RouteMeta | undefined {
